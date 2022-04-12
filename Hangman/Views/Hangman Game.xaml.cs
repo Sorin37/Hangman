@@ -1,4 +1,5 @@
 ﻿using Hangman.Models;
+using Hangman.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,13 +31,19 @@ namespace Hangman
 
         public Hangman_Game(StateOfTheGame previousGame)
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
-            //initialise the current game
+            //initialize the current game
             StateOfTheGame currentGame = (DataContext as HangmanVM).Game;
             currentGame.CurrentUser.Id = previousGame.CurrentUser.Id;
             currentGame.CurrentUser.Name = previousGame.CurrentUser.Name;
             currentGame.CurrentUser.Avatar = previousGame.CurrentUser.Avatar;
+            if(previousGame.Category!= null)
+            {
+                currentGame.Category = previousGame.Category;
+                currentGame.Level = previousGame.Level;
+            }
 
             //read the categories from json
             string categs = File.ReadAllText(".\\categories.json");
@@ -50,6 +57,16 @@ namespace Hangman
                 mi.IsCheckable = true;
                 mi.Click += MenuItemCategories_Click;
                 CategoriesMenuItem.Items.Add(mi);
+            }
+
+            if (currentGame.Level > 0)
+            {
+                foreach (MenuItem menuItem in CategoriesMenuItem.Items)
+                {
+                    menuItem.IsEnabled = false;
+                }
+                initializeGame(currentGame.Category);
+
             }
 
             TimeLabel.Content = "30";
@@ -72,10 +89,15 @@ namespace Hangman
                 menuItem.IsEnabled = false;
                 //}
             }
-            Random rnd = new Random();
             string selectedCategory = (sender as MenuItem).Header.ToString();
 
-            if (selectedCategory == "All categories")
+            initializeGame(selectedCategory);
+        }
+
+        private void initializeGame(string category)
+        {
+            Random rnd = new Random();
+            if (category == "All categories")
             {
                 var randomKey = categories.ElementAt(rnd.Next(0, categories.Count));
                 (DataContext as HangmanVM).Game.Category = "All categories";
@@ -110,8 +132,8 @@ namespace Hangman
             }
             else
             {
-                (DataContext as HangmanVM).Game.Category = selectedCategory;
-                var wordToGuess = categories[selectedCategory][rnd.Next(0, categories[selectedCategory].Count)];
+                (DataContext as HangmanVM).Game.Category = category;
+                var wordToGuess = categories[category][rnd.Next(0, categories[category].Count)];
                 (DataContext as HangmanVM).Game.SecretWord.Word = wordToGuess;
                 var charWord = wordToGuess.ToCharArray();
                 char[] maskedWord = new char[charWord.Length * 2];
@@ -226,8 +248,10 @@ namespace Hangman
 
                 if (gameWon)
                 {
-                    MessageBox.Show("Congratulations! You won!");
                     dispatcherTimer.Stop();
+                    WinScreen ws = new WinScreen((DataContext as HangmanVM).Game);
+                    ws.Show();
+                    Close();
                 }
             }
         }

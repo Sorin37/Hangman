@@ -46,6 +46,7 @@ namespace Hangman.Models
             {
                 _Level = value;
                 NotifyPropertyChanged("Level");
+                NotifyPropertyChanged("LevelText");
             }
         }
         public string LevelText { get { return $"{_Category} level: {_Level}"; } }
@@ -91,7 +92,7 @@ namespace Hangman.Models
             {
                 _Category = value;
                 NotifyPropertyChanged("Category");
-                NotifyPropertyChanged("LevelText ");
+                NotifyPropertyChanged("LevelText");
             }
         }
 

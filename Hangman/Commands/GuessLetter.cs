@@ -31,13 +31,13 @@ namespace Hangman
             char[] pressedLetter = (parameter as Button).Content.ToString().ToCharArray();
             var aux = secretWord.GuessedWord.ToCharArray();
 
-            _vm.LetterFound = false;
+            //_vm.LetterFound = false;
 
             for (int i = 0; i < secretWord.Word.Length; i++)
             {
                 if (Char.ToUpper(secretWord.Word[i]) == pressedLetter[0])
                 {
-                    _vm.LetterFound = true;
+                    //_vm.LetterFound = true;
                     aux[i * 2] = secretWord.Word[i];
                 }
             }
