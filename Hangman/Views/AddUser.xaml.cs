@@ -26,9 +26,21 @@ namespace Hangman
         }
         private void btn_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User() { Name = firstTxt.Text, Avatar = avatar.Source.ToString()};
+            int newId = 0;
+            if ((DataContext as UsersList).Users.Count > 0)
+            {
+                foreach (var usr in (DataContext as UsersList).Users)
+                {
+                    if (newId < usr.Id)
+                    {
+                        newId = usr.Id;
+                    }
+                }
+                newId++;
+            }
+            User user = new User() { Id = newId, Name = firstTxt.Text, Avatar = avatar.Source.ToString() };
             (DataContext as UsersList).Users.Add(user);
-            MessageBox.Show("User added!");
+            Close();
         }
 
         private void imageLeft_Click(object sender, RoutedEventArgs e)

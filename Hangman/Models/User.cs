@@ -9,8 +9,11 @@ namespace Hangman
 {
     public class User : INotifyPropertyChanged
     {
+        private int _Id;
+        public int Id { get { return _Id; } set { _Id = value; } }
         private string _Name;
-        public string Name {
+        public string Name
+        {
             get
             {
                 return _Name;
@@ -22,7 +25,8 @@ namespace Hangman
             }
         }
         private string _Avatar;
-        public string Avatar {
+        public string Avatar
+        {
             get
             {
                 return _Avatar;

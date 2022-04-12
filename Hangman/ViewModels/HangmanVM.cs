@@ -4,17 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Hangman
 {
     internal class HangmanVM
     {
-        public User CurrentUser { get; set; }
-        public SecretWord Word { get; set; }
+        public StateOfTheGame Game { get; set; }
+
+        private GuessLetter _pressLetter;
+        public ICommand pressLetter { get => _pressLetter; }
+
+        public bool LetterFound { get; set; }
         public HangmanVM()
         {
-            CurrentUser = new User();
-            Word = new SecretWord();
+            Game = new StateOfTheGame();
+            Game.CurrentUser = new User();
+            Game.SecretWord = new SecretWord();
+            _pressLetter = new GuessLetter(this);
+            LetterFound = false;
+        }
+        ~HangmanVM()
+        {
+            MessageBox.Show(Game.Level.ToString());
         }
     }
 }

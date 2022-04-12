@@ -85,29 +85,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="About.xaml.cs">
+    <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddUser.xaml.cs">
+    <Compile Include="Views\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Hangman Game.xaml.cs">
+    <Compile Include="Commands\GuessLetter.cs" />
+    <Compile Include="Views\Hangman Game.xaml.cs">
       <DependentUpon>Hangman Game.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\SecretWord.cs" />
+    <Compile Include="Models\StateOfTheGame.cs" />
     <Compile Include="ViewModels\HangmanVM.cs" />
     <Compile Include="Models\ImagePath.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\UsersList.cs" />
-    <Page Include="About.xaml">
+    <Page Include="Views\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddUser.xaml">
+    <Page Include="Views\AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Hangman Game.xaml">
+    <Page Include="Views\Hangman Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,12 +183,6 @@
     <Resource Include="Avatars\usertile41.jpg" />
     <Resource Include="Avatars\usertile42.jpg" />
     <Resource Include="Avatars\usertile44.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="download.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="download.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GallowParts\Gallow.png" />

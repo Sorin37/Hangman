@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hangman.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -47,10 +48,19 @@ namespace Hangman
 
         private void Button_Click_Play(object sender, RoutedEventArgs e)
         {
-            Hangman_Game hg = new Hangman_Game((DataContext as UsersList).HighlightedUser);
-            hg.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            hg.Show();
-            Close();
+            User highlightedUser = (DataContext as UsersList).HighlightedUser;
+            if (highlightedUser == null)
+            {
+                MessageBox.Show("Please select a user!");
+            }
+            else
+            {
+                StateOfTheGame firstGame = new StateOfTheGame() { CurrentUser = highlightedUser};
+                Hangman_Game hg = new Hangman_Game(firstGame);
+                hg.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                hg.Show();
+                Close();
+            }
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

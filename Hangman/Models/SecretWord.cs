@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hangman.Models
 {
-    internal class SecretWord : INotifyPropertyChanged
+    public class SecretWord : INotifyPropertyChanged
     {
         private string _word = "";
         public string Word

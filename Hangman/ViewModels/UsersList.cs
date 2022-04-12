@@ -34,7 +34,7 @@ namespace Hangman
             }
             SelectedImage = new ImagePath();
             SelectedImage.Path = Images[0];
-            HighlightedUser = Users[0];
+            HighlightedUser = null;
         }
 
         ~UsersList()
