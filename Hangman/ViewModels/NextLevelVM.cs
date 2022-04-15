@@ -1,5 +1,4 @@
-﻿using Hangman.Commands;
-using Hangman.Models;
+﻿using Hangman.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +11,14 @@ namespace Hangman.ViewModels
     internal class NextLevelVM
     {
         public StateOfTheGame Game { get; set; }
-        private NextLevelCommand _NextLevel;
-        public ICommand NextLevel { get => _NextLevel; }
+        //private NextLevelCommand _NextLevel;
+        //public ICommand NextLevel { get => _NextLevel; }
         public NextLevelVM()
         {
             Game = new StateOfTheGame();
             Game.CurrentUser = new User();
             Game.SecretWord = new SecretWord();
-            _NextLevel = new NextLevelCommand(this);
+            //_NextLevel = new NextLevelCommand(this);
         }
     }
 }

@@ -237,6 +237,7 @@ namespace Hangman
                     AllStats.First(x => x.User.Id == (DataContext as HangmanVM).Game.CurrentUser.Id).NrOfGames++;
                     string newStats = JsonSerializer.Serialize(AllStats);
                     File.WriteAllText(".\\userInfo.json", newStats);
+
                     Close();
 
                 }
@@ -260,9 +261,25 @@ namespace Hangman
                 if (gameWon)
                 {
                     dispatcherTimer.Stop();
-                    WinScreen ws = new WinScreen((DataContext as HangmanVM).Game);
-                    ws.Show();
-                    Close();
+                    if ((DataContext as HangmanVM).Game.Level < 5)
+                    {
+                        (DataContext as HangmanVM).Game.Level++;
+                        Hangman_Game ws = new Hangman_Game((DataContext as HangmanVM).Game);
+                        ws.Show();
+                    }
+                    else
+                    {
+                        ObservableCollection<Statistic> AllStats;
+                        string stats;
+                        stats = File.ReadAllText(".\\userInfo.json");
+                        AllStats = new ObservableCollection<Statistic>();
+                        AllStats = JsonSerializer.Deserialize<ObservableCollection<Statistic>>(stats);
+                        AllStats.First(x => x.User.Id == (DataContext as HangmanVM).Game.CurrentUser.Id).NrOfGames++;
+                        AllStats.First(x => x.User.Id == (DataContext as HangmanVM).Game.CurrentUser.Id).NrOfWins++;
+                        string newStats = JsonSerializer.Serialize(AllStats);
+                        File.WriteAllText(".\\userInfo.json", newStats);
+                    }
+                        Close();
                 }
             }
         }

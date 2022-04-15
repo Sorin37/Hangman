@@ -85,7 +85,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\NextLevelCommand.cs" />
     <Compile Include="Models\Statistic.cs" />
     <Compile Include="ViewModels\NextLevelVM.cs" />
     <Compile Include="ViewModels\StatisticsVM.cs" />
@@ -107,9 +106,6 @@
     <Compile Include="ViewModels\UsersList.cs" />
     <Compile Include="Views\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WinScreen.xaml.cs">
-      <DependentUpon>WinScreen.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\About.xaml">
       <SubType>Designer</SubType>
