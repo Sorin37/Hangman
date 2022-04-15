@@ -35,7 +35,7 @@ namespace Hangman.Models
                 NotifyPropertyChanged("Mistakes");
             }
         }
-        private int _Level = 0;
+        private int _Level = 1;
         public int Level
         {
             get

@@ -2,6 +2,7 @@
 using Hangman.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,7 @@ namespace Hangman
             currentGame.CurrentUser.Id = previousGame.CurrentUser.Id;
             currentGame.CurrentUser.Name = previousGame.CurrentUser.Name;
             currentGame.CurrentUser.Avatar = previousGame.CurrentUser.Avatar;
-            if(previousGame.Category!= null)
+            if (previousGame.Category != null)
             {
                 currentGame.Category = previousGame.Category;
                 currentGame.Level = previousGame.Level;
@@ -59,7 +60,7 @@ namespace Hangman
                 CategoriesMenuItem.Items.Add(mi);
             }
 
-            if (currentGame.Level > 0)
+            if (currentGame.Level > 1)
             {
                 foreach (MenuItem menuItem in CategoriesMenuItem.Items)
                 {
@@ -228,6 +229,16 @@ namespace Hangman
                     gameLost = true;
                     (DataContext as HangmanVM).Game.RemainingTime = (deadline - DateTime.Now).Seconds + 1;
 
+                    ObservableCollection<Statistic> AllStats;
+                    string stats;
+                    stats = File.ReadAllText(".\\userInfo.json");
+                    AllStats = new ObservableCollection<Statistic>();
+                    AllStats = JsonSerializer.Deserialize<ObservableCollection<Statistic>>(stats);
+                    AllStats.First(x => x.User.Id == (DataContext as HangmanVM).Game.CurrentUser.Id).NrOfGames++;
+                    string newStats = JsonSerializer.Serialize(AllStats);
+                    File.WriteAllText(".\\userInfo.json", newStats);
+                    Close();
+
                 }
             }
 
@@ -275,11 +286,21 @@ namespace Hangman
         private void NewGame(object sender, RoutedEventArgs e)
         {
             dispatcherTimer.Stop();
+            (DataContext as HangmanVM).Game.Category = null;
             Hangman_Game newGame = new Hangman_Game((DataContext as HangmanVM).Game);
             newGame.Show();
-            newGame.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Close();
         }
 
+        private void SaveGame(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Nipaa");
+        }
+
+        private void Statistics(object sender, RoutedEventArgs e)
+        {
+            StatisticsView stats = new StatisticsView();
+            stats.Show();
+        }
     }
 }

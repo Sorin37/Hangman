@@ -32,7 +32,6 @@ namespace Hangman.Views
             game.CurrentUser.Avatar = previousGame.CurrentUser.Avatar;
             game.Category = previousGame.Category;
             game.Level = previousGame.Level + 1;
-            MessageBox.Show((DataContext as NextLevelVM).Game.Category);
         }
     }
 }

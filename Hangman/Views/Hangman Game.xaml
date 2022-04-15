@@ -25,8 +25,8 @@
             <MenuItem Header="File">
                 <MenuItem Header="New Game" Click="NewGame"/>
                 <MenuItem Header="Open Game"/>
-                <MenuItem Header="Save Game"/>
-                <MenuItem Header="Statistics"/>
+                <MenuItem Header="Save Game" Click="SaveGame"/>
+                <MenuItem Header="Statistics" Click="Statistics"/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
             <MenuItem Name="CategoriesMenuItem" Header="Categories">
