@@ -70,7 +70,8 @@ namespace Hangman
 
             }
 
-            TimeLabel.Content = "30";
+            //TimeLabel.Content = "30";
+            (DataContext as HangmanVM).Game.RemainingTime = 30;
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
         }
 
@@ -292,11 +293,13 @@ namespace Hangman
                 dispatcherTimer.Stop();
                 dispatcherTimer.IsEnabled = false;
                 MessageBox.Show($"Time has expired! The word was: {(DataContext as HangmanVM).Game.SecretWord.Word}");
-                TimeLabel.Content = "0";
+                //TimeLabel.Content = "0";
+                (DataContext as HangmanVM).Game.RemainingTime = 0;
             }
             else
             {
-                TimeLabel.Content = secondsRemaining.ToString();
+                //TimeLabel.Content = secondsRemaining.ToString();
+                (DataContext as HangmanVM).Game.RemainingTime = secondsRemaining;
             }
         }
 
@@ -311,7 +314,25 @@ namespace Hangman
 
         private void SaveGame(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Nipaa");
+            ObservableCollection<StateOfTheGame> games = new ObservableCollection<StateOfTheGame>();
+            string json = File.ReadAllText(".\\savedGames.json");
+            games = JsonSerializer.Deserialize<ObservableCollection<StateOfTheGame>>(json);
+            StateOfTheGame lastSavedGame = new StateOfTheGame();
+            lastSavedGame = games.FirstOrDefault(x => x.CurrentUser.Id == (DataContext as HangmanVM).Game.CurrentUser.Id);
+            if(lastSavedGame == null)
+            {
+                games.Add((DataContext as HangmanVM).Game);
+                MessageBox.Show("Not found");
+            }
+            else
+            {
+                int index = games.IndexOf(games.First(x => x.CurrentUser.Id == (DataContext as HangmanVM).Game.CurrentUser.Id));
+                games[index] = (DataContext as HangmanVM).Game;
+                MessageBox.Show("I got found");
+            }
+            json = JsonSerializer.Serialize(games);
+            File.WriteAllText(".\\savedGames.json", json);
+            Close();
         }
 
         private void Statistics(object sender, RoutedEventArgs e)
