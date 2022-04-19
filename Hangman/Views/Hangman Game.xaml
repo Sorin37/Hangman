@@ -24,7 +24,7 @@
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="File">
                 <MenuItem Header="New Game" Click="NewGame"/>
-                <MenuItem Header="Open Game"/>
+                <MenuItem Header="Open Game" Click="OpenGame"/>
                 <MenuItem Header="Save Game" Click="SaveGame"/>
                 <MenuItem Header="Statistics" Click="Statistics"/>
                 <MenuItem Header="Exit"/>

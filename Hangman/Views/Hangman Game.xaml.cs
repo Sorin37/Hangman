@@ -5,18 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Hangman
@@ -60,17 +51,73 @@ namespace Hangman
                 CategoriesMenuItem.Items.Add(mi);
             }
 
-            if (currentGame.Level > 1)
+            if (previousGame.SecretWord == null)
             {
-                foreach (MenuItem menuItem in CategoriesMenuItem.Items)
+                if (currentGame.Level > 1)
                 {
-                    menuItem.IsEnabled = false;
+                    foreach (MenuItem menuItem in CategoriesMenuItem.Items)
+                    {
+                        menuItem.IsEnabled = false;
+                    }
+                    initializeGame(currentGame.Category);
                 }
-                initializeGame(currentGame.Category);
 
             }
+            else
+            {
+                //when saved game is opened
+                currentGame.SecretWord = previousGame.SecretWord;
+                currentGame.RemainingTime = previousGame.RemainingTime;
+                deadline = DateTime.Now.AddSeconds(currentGame.RemainingTime);
+                dispatcherTimer.Start();
+                currentGame.Mistakes = previousGame.Mistakes;
+                if (currentGame.Mistakes == 1)
+                {
+                    MistakeBox1.Text = "X";
+                    Gallow.Visibility = Visibility.Visible;
+                }
+                else if (currentGame.Mistakes == 2)
+                {
+                    MistakeBox1.Text = "X";
+                    MistakeBox2.Text = "X";
+                    Gallow.Visibility = Visibility.Visible;
+                    Noose.Visibility = Visibility.Visible;
+                }
+                else if (currentGame.Mistakes == 3)
+                {
+                    MistakeBox1.Text = "X";
+                    MistakeBox2.Text = "X";
+                    MistakeBox3.Text = "X";
+                    Gallow.Visibility = Visibility.Visible;
+                    Noose.Visibility = Visibility.Visible;
+                    Face.Visibility = Visibility.Visible;
+                }
+                else if (currentGame.Mistakes == 4)
+                {
+                    MistakeBox1.Text = "X";
+                    MistakeBox2.Text = "X";
+                    MistakeBox3.Text = "X";
+                    MistakeBox4.Text = "X";
+                    Gallow.Visibility = Visibility.Visible;
+                    Noose.Visibility = Visibility.Visible;
+                    Face.Visibility = Visibility.Visible;
+                    Body.Visibility = Visibility.Visible;
+                }
+                else if (currentGame.Mistakes == 5)
+                {
+                    MistakeBox1.Text = "X";
+                    MistakeBox2.Text = "X";
+                    MistakeBox3.Text = "X";
+                    MistakeBox4.Text = "X";
+                    MistakeBox5.Text = "X";
+                    Gallow.Visibility = Visibility.Visible;
+                    Noose.Visibility = Visibility.Visible;
+                    Face.Visibility = Visibility.Visible;
+                    Body.Visibility = Visibility.Visible;
+                    Gasoline.Visibility = Visibility.Visible;
+                }
+            }
 
-            //TimeLabel.Content = "30";
             (DataContext as HangmanVM).Game.RemainingTime = 30;
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
         }
@@ -265,6 +312,7 @@ namespace Hangman
                     if ((DataContext as HangmanVM).Game.Level < 5)
                     {
                         (DataContext as HangmanVM).Game.Level++;
+                        (DataContext as HangmanVM).Game.SecretWord = null;
                         Hangman_Game ws = new Hangman_Game((DataContext as HangmanVM).Game);
                         ws.Show();
                     }
@@ -279,8 +327,10 @@ namespace Hangman
                         AllStats.First(x => x.User.Id == (DataContext as HangmanVM).Game.CurrentUser.Id).NrOfWins++;
                         string newStats = JsonSerializer.Serialize(AllStats);
                         File.WriteAllText(".\\userInfo.json", newStats);
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
                     }
-                        Close();
+                    Close();
                 }
             }
         }
@@ -319,20 +369,39 @@ namespace Hangman
             games = JsonSerializer.Deserialize<ObservableCollection<StateOfTheGame>>(json);
             StateOfTheGame lastSavedGame = new StateOfTheGame();
             lastSavedGame = games.FirstOrDefault(x => x.CurrentUser.Id == (DataContext as HangmanVM).Game.CurrentUser.Id);
-            if(lastSavedGame == null)
+            if (lastSavedGame == null)
             {
                 games.Add((DataContext as HangmanVM).Game);
-                MessageBox.Show("Not found");
             }
             else
             {
                 int index = games.IndexOf(games.First(x => x.CurrentUser.Id == (DataContext as HangmanVM).Game.CurrentUser.Id));
                 games[index] = (DataContext as HangmanVM).Game;
-                MessageBox.Show("I got found");
             }
             json = JsonSerializer.Serialize(games);
             File.WriteAllText(".\\savedGames.json", json);
             Close();
+        }
+        private void OpenGame(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<StateOfTheGame> games = new ObservableCollection<StateOfTheGame>();
+            string json = File.ReadAllText(".\\savedGames.json");
+            games = JsonSerializer.Deserialize<ObservableCollection<StateOfTheGame>>(json);
+            StateOfTheGame lastSavedGame = new StateOfTheGame();
+            lastSavedGame = games.FirstOrDefault(x => x.CurrentUser.Id == (DataContext as HangmanVM).Game.CurrentUser.Id);
+            if (lastSavedGame == null)
+            {
+                MessageBox.Show("No saved game for this user");
+            }
+            else
+            {
+                games.Remove(lastSavedGame);
+                json = JsonSerializer.Serialize(games);
+                File.WriteAllText(".\\savedGames.json", json);
+                Hangman_Game hg = new Hangman_Game(lastSavedGame);
+                hg.Show();
+                Close();
+            }
         }
 
         private void Statistics(object sender, RoutedEventArgs e)
