@@ -74,23 +74,20 @@ namespace Hangman
                 if (currentGame.Mistakes == 1)
                 {
                     MistakeBox1.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/1.png";
                 }
                 else if (currentGame.Mistakes == 2)
                 {
                     MistakeBox1.Text = "X";
                     MistakeBox2.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
-                    Noose.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/2.png";
                 }
                 else if (currentGame.Mistakes == 3)
                 {
                     MistakeBox1.Text = "X";
                     MistakeBox2.Text = "X";
                     MistakeBox3.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
-                    Noose.Visibility = Visibility.Visible;
-                    Face.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/3.png";
                 }
                 else if (currentGame.Mistakes == 4)
                 {
@@ -98,10 +95,7 @@ namespace Hangman
                     MistakeBox2.Text = "X";
                     MistakeBox3.Text = "X";
                     MistakeBox4.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
-                    Noose.Visibility = Visibility.Visible;
-                    Face.Visibility = Visibility.Visible;
-                    Body.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/4.png";
                 }
                 else if (currentGame.Mistakes == 5)
                 {
@@ -110,11 +104,7 @@ namespace Hangman
                     MistakeBox3.Text = "X";
                     MistakeBox4.Text = "X";
                     MistakeBox5.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
-                    Noose.Visibility = Visibility.Visible;
-                    Face.Visibility = Visibility.Visible;
-                    Body.Visibility = Visibility.Visible;
-                    Gasoline.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/5.png";
                 }
             }
 
@@ -245,34 +235,33 @@ namespace Hangman
                 if (mistakes == 1)
                 {
                     MistakeBox1.Text = "X";
-                    Gallow.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/1.png";
                 }
                 else if (mistakes == 2)
                 {
                     MistakeBox2.Text = "X";
-                    Noose.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/2.png";
                 }
                 else if (mistakes == 3)
                 {
                     MistakeBox3.Text = "X";
-                    Face.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/3.png";
                 }
                 else if (mistakes == 4)
                 {
                     MistakeBox4.Text = "X";
-                    Body.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/4.png";
                 }
                 else if (mistakes == 5)
                 {
                     MistakeBox5.Text = "X";
-                    Gasoline.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/5.png";
                 }
                 else if (mistakes == 6)
                 {
                     dispatcherTimer.Stop();
                     MistakeBox6.Text = "X";
-                    Gasoline.Visibility = Visibility.Hidden;
-                    Fire.Visibility = Visibility.Visible;
+                    (DataContext as HangmanVM).Image = "../Gallow/6.png";
                     MessageBox.Show($"You lost! The word was: {secretWord.Word}");
                     gameLost = true;
                     (DataContext as HangmanVM).Game.RemainingTime = (deadline - DateTime.Now).Seconds + 1;

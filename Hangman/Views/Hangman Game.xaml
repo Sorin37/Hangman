@@ -127,7 +127,7 @@
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
                    TextAlignment="Center" Name="MistakeBox6" HorizontalAlignment="Left" Margin="20,0,0,0"/>
         </StackPanel>
-        <Image Name="Gallow" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Gallow.png" Visibility="Hidden"/>
+        <!--<Image Name="Gallow" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Gallow.png" Visibility="Hidden"/>
         <Image Name="Noose" Grid.Row="2" Source="../GallowParts/Noose.png" Margin="178,37,0,66" Visibility="Hidden"/>
         <Image Name="Face" Grid.Row="2" Source="../GallowParts/Face.png" Margin="324,65,146,34" Visibility="Hidden"/>
         <Image Name="Body" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Body.png" Margin="266,147,88,104" Visibility="Hidden"/>
@@ -141,7 +141,8 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Name="Fire" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Fire.png" Margin="240,156,62,34" Visibility="Hidden"/>
+        <Image Name="Fire" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Fire.png" Margin="240,156,62,34" Visibility="Hidden"/>-->
+        <Image Grid.Row="2" Grid.RowSpan="2" Source="{Binding Image }"/>
 
     </Grid>
 </Window>

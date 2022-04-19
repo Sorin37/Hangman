@@ -199,22 +199,15 @@
     <Resource Include="Avatars\usertile44.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GallowParts\Gallow.png" />
+    <Resource Include="Gallow\1.png" />
+    <Resource Include="Gallow\2.png" />
+    <Resource Include="Gallow\3.png" />
+    <Resource Include="Gallow\4.png" />
+    <Resource Include="Gallow\5.png" />
+    <Resource Include="Gallow\6.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GallowParts\Noose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GallowParts\Face.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GallowParts\Body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GallowParts\Gasoline.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GallowParts\Fire.png" />
+    <Resource Include="Gallow\0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.7.0.0-preview.2.22152.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.7.0.0-preview.2.22152.2\build\System.Text.Json.targets')" />

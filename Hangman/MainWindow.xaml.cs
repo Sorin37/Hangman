@@ -44,6 +44,7 @@ namespace Hangman
                     (DataContext as UsersList).HighlightedUser = (DataContext as UsersList).Users[0];
                 }
             }
+            //tre sa stergi si userul din statistics si din saved games
         }
 
         private void Button_Click_Play(object sender, RoutedEventArgs e)
