@@ -115,34 +115,19 @@
         </WrapPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox1" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" Text="{Binding Boxes[0]}"/>
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox2" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Text="{Binding Boxes[1]}"/>
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox3" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Text="{Binding Boxes[2]}"/>
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox4" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Text="{Binding Boxes[3]}"/>
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox5" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Text="{Binding Boxes[4]}"/>
             <TextBlock Width="50" Height="50" FontSize="40" Background="LightGray" 
-                   TextAlignment="Center" Name="MistakeBox6" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                   TextAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Text="{Binding Boxes[5]}"/>
         </StackPanel>
-        <!--<Image Name="Gallow" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Gallow.png" Visibility="Hidden"/>
-        <Image Name="Noose" Grid.Row="2" Source="../GallowParts/Noose.png" Margin="178,37,0,66" Visibility="Hidden"/>
-        <Image Name="Face" Grid.Row="2" Source="../GallowParts/Face.png" Margin="324,65,146,34" Visibility="Hidden"/>
-        <Image Name="Body" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Body.png" Margin="266,147,88,104" Visibility="Hidden"/>
-        <Image Name="Gasoline" Grid.Row="3" Source="../GallowParts/Gasoline.png" Margin="364,114,54,14" Visibility="Hidden" RenderTransformOrigin="0.172,0.458">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-51.919"/>
-                    <TranslateTransform X="17.7" Y="49.51"/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Image Name="Fire" Grid.Row="2" Grid.RowSpan="2" Source="../GallowParts/Fire.png" Margin="240,156,62,34" Visibility="Hidden"/>-->
-        <Image Grid.Row="2" Grid.RowSpan="2" Source="{Binding Image }"/>
+        <Image Grid.Row="2" Grid.RowSpan="2" Source="{Binding Image}"/>
 
     </Grid>
 </Window>

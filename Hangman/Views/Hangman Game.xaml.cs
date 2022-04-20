@@ -73,37 +73,27 @@ namespace Hangman
                 currentGame.Mistakes = previousGame.Mistakes;
                 if (currentGame.Mistakes == 1)
                 {
-                    MistakeBox1.Text = "X";
+                    (DataContext as HangmanVM).Boxes[0] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/1.png";
                 }
                 else if (currentGame.Mistakes == 2)
                 {
-                    MistakeBox1.Text = "X";
-                    MistakeBox2.Text = "X";
+                    (DataContext as HangmanVM).Boxes = new ObservableCollection<string>() { "X", "X", "", "", "", "" };
                     (DataContext as HangmanVM).Image = "../Gallow/2.png";
                 }
                 else if (currentGame.Mistakes == 3)
                 {
-                    MistakeBox1.Text = "X";
-                    MistakeBox2.Text = "X";
-                    MistakeBox3.Text = "X";
+                    (DataContext as HangmanVM).Boxes = new ObservableCollection<string>() { "X", "X", "X", "", "", "" };
                     (DataContext as HangmanVM).Image = "../Gallow/3.png";
                 }
                 else if (currentGame.Mistakes == 4)
                 {
-                    MistakeBox1.Text = "X";
-                    MistakeBox2.Text = "X";
-                    MistakeBox3.Text = "X";
-                    MistakeBox4.Text = "X";
+                    (DataContext as HangmanVM).Boxes = new ObservableCollection<string>() { "X", "X", "X", "X", "", "" };
                     (DataContext as HangmanVM).Image = "../Gallow/4.png";
                 }
                 else if (currentGame.Mistakes == 5)
                 {
-                    MistakeBox1.Text = "X";
-                    MistakeBox2.Text = "X";
-                    MistakeBox3.Text = "X";
-                    MistakeBox4.Text = "X";
-                    MistakeBox5.Text = "X";
+                    (DataContext as HangmanVM).Boxes = new ObservableCollection<string>() { "X", "X", "X", "X", "X", "" };
                     (DataContext as HangmanVM).Image = "../Gallow/5.png";
                 }
             }
@@ -234,33 +224,33 @@ namespace Hangman
                 int mistakes = ++(DataContext as HangmanVM).Game.Mistakes;
                 if (mistakes == 1)
                 {
-                    MistakeBox1.Text = "X";
+                    (DataContext as HangmanVM).Boxes[0] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/1.png";
                 }
                 else if (mistakes == 2)
                 {
-                    MistakeBox2.Text = "X";
+                    (DataContext as HangmanVM).Boxes[1] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/2.png";
                 }
                 else if (mistakes == 3)
                 {
-                    MistakeBox3.Text = "X";
+                    (DataContext as HangmanVM).Boxes[2] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/3.png";
                 }
                 else if (mistakes == 4)
                 {
-                    MistakeBox4.Text = "X";
+                    (DataContext as HangmanVM).Boxes[3] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/4.png";
                 }
                 else if (mistakes == 5)
                 {
-                    MistakeBox5.Text = "X";
+                    (DataContext as HangmanVM).Boxes[4] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/5.png";
                 }
                 else if (mistakes == 6)
                 {
                     dispatcherTimer.Stop();
-                    MistakeBox6.Text = "X";
+                    (DataContext as HangmanVM).Boxes[5] = "X";
                     (DataContext as HangmanVM).Image = "../Gallow/6.png";
                     MessageBox.Show($"You lost! The word was: {secretWord.Word}");
                     gameLost = true;

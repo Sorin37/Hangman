@@ -1,6 +1,7 @@
 ﻿using Hangman.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,22 @@ namespace Hangman
         //public bool LetterFound { get; set; }
 
         private string _Image;
-        public string Image { get => _Image; set {
+        public string Image
+        {
+            get => _Image; set
+            {
                 _Image = value;
                 NotifyPropertyChanged("Image");
-            } }
-
+            }
+        }
+        private ObservableCollection<string> _Boxes;
+        public ObservableCollection<string> Boxes {
+            get => _Boxes; set
+            {
+                _Boxes = value;
+                NotifyPropertyChanged("Boxes");
+            }
+        }
 
         public HangmanVM()
         {
@@ -33,7 +45,9 @@ namespace Hangman
             //_pressLetter = new GuessLetter(this);
             //LetterFound = false;
             Image = "../Gallow/0.png";
+            Boxes = new ObservableCollection<string>() { "", "", "", "", "", ""};
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged(string propertyName)
         {
